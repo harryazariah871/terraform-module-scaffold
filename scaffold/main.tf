@@ -24,13 +24,13 @@ resource "azurerm_public_ip" "pip02" {
 }
 
 resource "azurerm_network_security_group" "nsg01" {
-  name                = "${azurerm_virtual_network.vnet01.name}-nsg"
+  name                = "${var.vnet01Name}-nsg"
   location            = "${azurerm_resource_group.core.location}"
   resource_group_name = "${azurerm_resource_group.core.name}"
 }
 
 resource "azurerm_virtual_network" "vnet01" {
-  name                = "core"
+  name                = "${var.vnet01Name}"
   location            = "${azurerm_resource_group.core.location}"
   resource_group_name = "${azurerm_resource_group.core.name}"
   address_space       = ["10.0.0.0/16"]
@@ -49,7 +49,6 @@ resource "azurerm_virtual_network" "vnet01" {
   subnet {
     name           = "dev"
     address_prefix = "10.0.2.0/24"
-    security_group = "${azurerm_network_security_group.nsg01.id}"
   }
 
   tags = "${azurerm_resource_group.core.tags}"

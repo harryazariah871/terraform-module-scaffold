@@ -9,3 +9,8 @@ variable "tags" {
         env     = "training"
     }
 }
+
+variable "vnet01Name" {
+    description = "Default VNet Name"
+    default     =   "vnet01"
+}
